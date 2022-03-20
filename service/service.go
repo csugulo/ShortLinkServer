@@ -89,7 +89,7 @@ func (service *Service) initHttpServer() {
 			url, expiredTime, err := dals.GetUrl(service.rocksDB, urlID)
 			log.Infof("get url from rocksdb by urlID, urlID: %v, url: %v, expiredTime: %v, err: %v", urlID, url, expiredTime, err)
 			if err == nil && expiredTime.After(time.Now()) {
-				if !strings.HasPrefix(url, "http://") {
+				if !strings.HasPrefix(url, "http") {
 					url = "http://" + url
 				}
 				c.Redirect(http.StatusMovedPermanently, url)
