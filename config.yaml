@@ -1,0 +1,11 @@
+http:
+  host: 192.168.193.219
+  port: 8080
+
+mysql:
+  host: 127.0.0.1
+  user: short_link_web
+  password: short_link_web
+
+rocksdb:
+  path: rocksdb
