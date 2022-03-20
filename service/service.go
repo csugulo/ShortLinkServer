@@ -129,5 +129,5 @@ func (service *Service) Init() {
 }
 
 func (service *Service) Start() {
-	service.httpEngine.Run(fmt.Sprintf("%v:%v", service.conf.GetString("http.ip"), service.conf.GetString("http.port")))
+	service.httpEngine.Run(fmt.Sprintf("0.0.0.0:%v", service.conf.GetString("http.port")))
 }
