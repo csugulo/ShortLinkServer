@@ -1,3 +1,5 @@
 .vscode/
 log/
 output/
+rocksdb/
+sqlite3.db
