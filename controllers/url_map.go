@@ -68,6 +68,7 @@ type CreatePostPayload struct {
 
 func CreatePost(c *gin.Context) {
 	var payload CreatePostPayload
+	c.BindJSON(&payload)
 	CreateCommon(payload.Url, c)
 }
 
