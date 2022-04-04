@@ -1,4 +1,4 @@
-module github.com/csugulo/ShortLinkWeb
+module github.com/csugulo/ShortLinkServer
 
 go 1.17
 

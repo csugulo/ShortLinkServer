@@ -3,6 +3,7 @@ package db
 import (
 	"database/sql"
 
+	"github.com/csugulo/ShortLinkServer/consts"
 	_ "github.com/mattn/go-sqlite3"
 	log "github.com/sirupsen/logrus"
 	"github.com/tecbot/gorocksdb"
@@ -27,5 +28,8 @@ func InitSqliteDB(dbPath string) {
 		log.Fatalf("can not open sqlite3: %v\n, err: %v", dbPath, err)
 	} else {
 		SqliteDB = db
+	}
+	if _, err := SqliteDB.Exec(consts.CreateLogTable); err != nil {
+		log.Fatalf("can not create table: log\n, err: %v", err)
 	}
 }

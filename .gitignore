@@ -2,4 +2,6 @@
 log/
 output/
 rocksdb/
-sqlite3.db
+sqlite.db
+stderr.log
+stdout.log

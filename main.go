@@ -5,9 +5,9 @@ import (
 	"os"
 
 	"github.com/akamensky/argparse"
-	"github.com/csugulo/ShortLinkWeb/config"
-	"github.com/csugulo/ShortLinkWeb/controllers"
-	"github.com/csugulo/ShortLinkWeb/db"
+	"github.com/csugulo/ShortLinkServer/config"
+	"github.com/csugulo/ShortLinkServer/controllers"
+	"github.com/csugulo/ShortLinkServer/db"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,7 +16,7 @@ type Args struct {
 }
 
 func parseArgs() Args {
-	parser := argparse.NewParser("ShortLinkWeb", "short link web service")
+	parser := argparse.NewParser("ShortLinkServer", "short link web service")
 	configPathPtr := parser.String("c", "config", &argparse.Options{Required: true, Help: "config path"})
 	if err := parser.Parse(os.Args); err != nil {
 		fmt.Print(parser.Usage(err))

@@ -1,10 +1,9 @@
 http:
   host: 192.168.193.219
   port: 8080
-  domain: 192.168.193.219
 
 sqlite:
-  path: sqlite3.db
+  path: sqlite.db
 
 rocksdb:
   path: rocksdb
