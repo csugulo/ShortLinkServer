@@ -6,6 +6,6 @@ RUN apt update \
     && cd /opt/short_link_server \
     && ./build.sh
 EXPOSE 8080
-ENTRYPOINT ["./server", "--config=config.yaml"]
+ENTRYPOINT ["./server"]
 VOLUME /opt/short_link_server/build/rocksdb
 VOLUME /opt/short_link_server/build/sqlite.db

@@ -11,23 +11,22 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type Args struct {
-	configPath string
-	domain     string
-}
-
-func parseArgs() Args {
+func parseArgs() {
 	parser := argparse.NewParser("ShortLinkServer", "short link web service")
 
-	domainPtr := parser.String("d", "domain", &argparse.Options{Required: false, Default: "localhost", Help: "domain"})
-	configPathPtr := parser.String("c", "config", &argparse.Options{Required: true, Help: "config path"})
+	domain := parser.String("d", "domain", &argparse.Options{Required: false, Default: "localhost", Help: "domain name"})
+	port := parser.Int("p", "port", &argparse.Options{Required: false, Default: 8080, Help: "http port"})
+	sqliteDBPath := parser.String("s", "sqlite", &argparse.Options{Required: false, Default: "sqlite.db", Help: "sqlite db path"})
+	rocksDBPath := parser.String("r", "rocksdb", &argparse.Options{Required: false, Default: "rocksdb", Help: "rocksdb path"})
 	if err := parser.Parse(os.Args); err != nil {
 		fmt.Print(parser.Usage(err))
 		os.Exit(-1)
 	}
-	return Args{
-		configPath: *configPathPtr,
-		domain:     *domainPtr,
+	config.Conf = config.Config{
+		Domian:       *domain,
+		Port:         *port,
+		SqliteDBPath: *sqliteDBPath,
+		RocksDBPath:  *rocksDBPath,
 	}
 }
 
@@ -36,12 +35,10 @@ type App struct {
 }
 
 func main() {
-	args := parseArgs()
-
-	config.InitConf(args.configPath, args.domain)
-	db.InitRocksDB(config.Conf.GetString("rocksdb.path"))
-	db.InitSqliteDB(config.Conf.GetString("sqlite.path"))
+	parseArgs()
+	db.InitRocksDB(config.Conf.RocksDBPath)
+	db.InitSqliteDB(config.Conf.SqliteDBPath)
 
 	controllers.InitServer()
-	controllers.Server.Run(fmt.Sprintf("0.0.0.0:%v", config.Conf.GetString("http.port")))
+	controllers.Server.Run(fmt.Sprintf("0.0.0.0:%v", config.Conf.Port))
 }

@@ -68,9 +68,9 @@ func CreateCommon(originUrl string, c *gin.Context) {
 	}
 	if err == nil {
 		log.Infof("url: %v get urlID: %v", originUrl, urlID)
-		shortURL := fmt.Sprintf("%v:%v/%v", config.Conf.GetString("http.domain"), config.Conf.GetInt("http.port"), urlID)
-		if config.Conf.GetInt("http.port") == 80 {
-			shortURL = fmt.Sprintf("%v/%v", config.Conf.GetString("http.domain"), urlID)
+		shortURL := fmt.Sprintf("%v:%v/%v", config.Conf.Domian, config.Conf.Port, urlID)
+		if config.Conf.Port == 80 {
+			shortURL = fmt.Sprintf("%v/%v", config.Conf.Domian, urlID)
 		}
 		c.JSON(http.StatusOK, gin.H{
 			"short_url": shortURL,

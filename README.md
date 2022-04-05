@@ -15,7 +15,7 @@ sudo apt install -y sqlite3 libsqlite3-dev librocksdb-dev libz-dev libbz2-dev li
 git clone https://github.com/csugulo/ShortLinkServer.git
 cd ShortLinkServer
 
-go run main.go --config=config.yaml
+go run main.go
 ```
 
 ## Usage
@@ -30,12 +30,16 @@ curl --location --request POST 'localhost:8080/statistics'
 
 ## Use Docker image
 ```
-docker run -d -p 8080:8080 \
+docker run -d -p 80:80 \
     --volume=$PWD/rocksdb:/opt/short_link_server/build/rocksdb \
     --volume=$PWD/sqlite.db:/opt/short_link_server/build/sqlite.db \
-    short_link_server:0.0.1 -d YOUR_DOMAIN_NAME
+    csugulo/short_link_server -d YOUR_DOMAIN_NAME -p 80
 ```
 
+## Try it online!
+```
+curl --location --request POST 'treemonkey.fun/create' --data-raw '{"url":"https://www.bilibili.com/video/BV1Sx411T7QQ"}'
+```
 
 [1]: https://go.dev/
 [2]: https://github.com/gin-gonic/gin
