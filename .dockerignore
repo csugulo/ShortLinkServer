@@ -1,6 +1,6 @@
+.git
 .vscode/
 log/
-build/
 rocksdb/
 sqlite.db
 stderr.log

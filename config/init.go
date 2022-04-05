@@ -8,10 +8,11 @@ import (
 
 var Conf *viper.Viper
 
-func InitConf(configPath string) {
+func InitConf(configPath, domain string) {
 	Conf = viper.New()
 	Conf.SetConfigFile(configPath)
 	if err := Conf.ReadInConfig(); err != nil {
 		log.Fatalf("can not read config: %v\n, err: %v", configPath, err)
 	}
+	Conf.Set("http.domain", domain)
 }
