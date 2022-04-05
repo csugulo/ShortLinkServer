@@ -2,6 +2,7 @@ package dals
 
 import (
 	"fmt"
+	"sync"
 
 	"github.com/csugulo/ShortLinkServer/consts"
 	"github.com/csugulo/ShortLinkServer/db"
@@ -9,7 +10,11 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+var writeMutex sync.Mutex
+
 func AddLog(logType consts.LogType, url, urlID string, status consts.Status, statusMessage string) error {
+	writeMutex.Lock()
+	defer writeMutex.Unlock()
 	stmt, err := db.SqliteDB.Prepare(consts.InsertLogSQL)
 	if err != nil {
 		log.Errorf("prepare statement failed, err: %v", err)
