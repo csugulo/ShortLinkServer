@@ -38,7 +38,7 @@ docker run -d -p 80:80 \
 
 ## Try it online!
 ```
-curl --location --request POST 'treemonkey.fun/create' \
+curl --location --request POST 'painitch.tech/create' \
     --data-raw '{"url":"https://www.bilibili.com/video/BV1Sx411T7QQ"}'
 ```
 
